@@ -1,7 +1,12 @@
 #!/bin/sh
 
-MODULE=$1
+DIRNAME=$1
+EXERCISENAME=$2
+if [ -z $EXERCISENAME ]
+then
+    EXERCISENAME=$DIRNAME
+fi
 
-cd ${0%/*}/$MODULE &&
-        erlc $MODULE*.erl &&
-        erl -noshell -eval "eunit:test($MODULE, [verbose])" -s init stop
+cd ${0%/*}/$DIRNAME &&
+        erlc $EXERCISENAME*.erl &&
+        erl -noshell -eval "eunit:test($EXERCISENAME, [verbose])" -s init stop
