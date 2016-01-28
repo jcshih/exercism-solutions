@@ -18,20 +18,13 @@ defmodule Phone do
   """
   @spec number(String.t) :: String.t
   def number(raw) do
-    raw = Regex.replace(~r/[\.\(\)\- ]/, raw, "")
-    cond do
-      not String.length(raw) in [10, 11] ->
-        "0000000000"
-      String.length(raw) === 11 ->
-        if String.first(raw) === "1" do
-          String.slice(raw, 1..-1)
-        else
-          "0000000000"
-        end
-      true ->
-        raw
-    end
+    Regex.replace(~r/[^\w]/, raw, "") |> validate
   end
+
+  @spec validate(String.t) :: String.t
+  defp validate(number) when byte_size(number) == 10, do: number
+  defp validate("1" <> rest) when byte_size(rest) == 10, do: rest
+  defp validate(_), do: "0000000000"
 
   @doc """
   Extract the area code from a phone number
@@ -75,8 +68,10 @@ defmodule Phone do
   @spec pretty(String.t) :: String.t
   def pretty(raw) do
     area = area_code(raw)
-    prefix = raw |> number |> String.slice(3..5)
-    line_number = raw |> number |> String.slice(6..10)
+    { prefix, line_number } = raw
+                              |> number
+                              |> String.slice(3..-1)
+                              |> String.split_at(3)
     "(#{area}) #{prefix}-#{line_number}"
   end
 end
