@@ -1,3 +1,5 @@
 exercism
 *.beam
 .version
+node_modules
+babel-output
