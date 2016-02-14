@@ -7,7 +7,7 @@ class Hamming {
     if (a.length != b.length)
       throw new Error('DNA strands must be of equal length.');
 
-    return this.zip(a.split(''), b.split(''))
+    return this.zip([...a], [...b])
       .map(([x, y]) => x != y)
       .filter((x) => x)
       .length;
