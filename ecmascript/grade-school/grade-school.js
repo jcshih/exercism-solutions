@@ -4,21 +4,23 @@ class School {
   }
 
   roster() {
-    return JSON.parse(JSON.stringify(this.db));
+    return clone(this.db);
   }
 
-  add(name, id) {
-    if (id in this.db) {
-      this.db[id].push(name);
-      this.db[id].sort();
+  add(studentName, gradeLevel) {
+    if (gradeLevel in this.db) {
+      this.db[gradeLevel].push(studentName);
+      this.db[gradeLevel].sort();
     } else {
-      this.db[id] = [ name ];
+      this.db[gradeLevel] = [ studentName ];
     }
   }
 
-  grade(n) {
-    return this.db[n] || [];
+  grade(gradeLevel) {
+    return this.db[gradeLevel] ? clone(this.db[gradeLevel]) : [];
   }
 }
+
+const clone = (obj) => JSON.parse(JSON.stringify(obj));
 
 export default School;
