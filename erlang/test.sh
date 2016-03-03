@@ -8,5 +8,6 @@ then
 fi
 
 cd ${0%/*}/$DIRNAME &&
-        erlc $EXERCISENAME*.erl &&
+        erlc +debug_info $EXERCISENAME*.erl &&
+        dialyzer $EXERCISENAME.erl &&
         erl -noshell -eval "eunit:test($EXERCISENAME, [verbose])" -s init stop
