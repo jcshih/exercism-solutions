@@ -3,3 +3,6 @@ exercism
 .version
 node_modules
 babel-output
+target
+.lein-*
+.nrepl-port
