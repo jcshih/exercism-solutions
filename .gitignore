@@ -12,3 +12,4 @@ csharp/csharp.*
 csharp/packages
 csharp/**/bin
 csharp/**/obj
+csharp/**/Test.cs
