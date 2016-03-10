@@ -6,3 +6,9 @@ babel-output
 target
 .lein-*
 .nrepl-port
+*.csproj
+packages.config
+csharp/csharp.*
+csharp/packages
+csharp/**/bin
+csharp/**/obj
