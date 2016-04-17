@@ -13,3 +13,4 @@ csharp/packages
 csharp/**/bin
 csharp/**/obj
 csharp/**/Test.cs
+elm-stuff
